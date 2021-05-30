@@ -9,14 +9,14 @@ app = Flask(__name__)
 @app.route('/nodes',methods=['GET'])
 def nodes():
     nodes = rqt.get_nodes()
-    return Response(jsonify(nodes),status=200)
+    return jsonify(nodes)
 
 
 
 @app.route("/nodes/<id>",methods=['GET'])
 def get_node_info(id):
     node_info = rqt.get_node_info(id)
-    return Response(jsonify(node_info),status=200)
+    return jsonify(node_info)
 
 
 
@@ -26,7 +26,7 @@ def node_deploy(id,program):
     if success:
         return Response(status=200)
     else:
-        return Response(jsonify(error),status=404)
+        return jsonify(error), 404
 
 
 @app.route("/nodes/<id>/start",methods=['POST'])
